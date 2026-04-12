@@ -1,0 +1,35 @@
+[
+  {
+    "id": "github",
+    "label": "GitHub",
+    "url": "https://github.com/AdamDuda1",
+    "iconSrc": "https://cdn.simpleicons.org/github/ffffff",
+    "iconText": "GH",
+    "enabled": true
+  },
+  {
+    "id": "slack",
+    "label": "Slack",
+    "url": "https://slack.com",
+    "iconSrc": "https://cdn.simpleicons.org/slack/ffffff",
+    "iconText": "SL",
+    "enabled": true
+  },
+  {
+    "id": "google-play",
+    "label": "Google Play",
+    "url": "https://play.google.com",
+    "iconSrc": "https://cdn.simpleicons.org/googleplay/ffffff",
+    "iconText": "GP",
+    "enabled": true
+  },
+  {
+    "id": "discord",
+    "label": "Discord",
+    "url": "https://discord.com",
+    "iconSrc": "https://cdn.simpleicons.org/discord/ffffff",
+    "iconText": "DC",
+    "enabled": true
+  }
+]
+

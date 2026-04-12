@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Adam - Personal Website</title>
+    <meta
+            name="description"
+            content="A simple, polished personal website with a project grid made of clickable cards."
+    />
+    <link rel="stylesheet" href="./assets/styles.css"/>
+</head>
+<body>
+<main class="container" aria-label="Main content">
+      <section class="top-links" aria-label="Quick links">
+        <div id="social-links" class="social-links" aria-live="polite"></div>
+      </section>
+
+    <section class="action-bar" aria-label="Project tools">
+        <h1 class="title">Adam Duda</h1>
+        <!--        <p id="projects-count" class="muted">Loading projects...</p>-->
+        <button id="random-project-btn" class="random-btn" type="button">Surprise me</button>
+    </section>
+
+    <section id="projects-grid" class="projects-grid" aria-live="polite"></section>
+</main>
+
+
+<template id="project-card-template">
+    <article class="project-card">
+        <div class="card-top">
+            <img class="icon" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" loading="lazy" decoding="async"/>
+            <h3></h3>
+        </div>
+        <p class="description"></p>
+        <div class="card-actions">
+            <a class="visit repo-link" target="_blank" rel="noreferrer noopener">View repo</a>
+            <a class="visit project-link" target="_blank" rel="noreferrer noopener">Open project -></a>
+        </div>
+    </article>
+</template>
+
+    <template id="social-link-template">
+      <a class="social-link" target="_blank" rel="noreferrer noopener">
+        <span class="social-icon" aria-hidden="true">
+          <img class="social-icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" loading="lazy" decoding="async" />
+          <span class="social-icon-text"></span>
+        </span>
+        <span class="social-label"></span>
+      </a>
+    </template>
+
+<script type="module" src="./scripts/render-projects.js"></script>
+</body>
+</html>
+
