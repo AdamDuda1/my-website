@@ -2,6 +2,8 @@ const grid = document.querySelector("#projects-grid");
 const template = document.querySelector("#project-card-template");
 const socialLinksRoot = document.querySelector("#social-links");
 const socialTemplate = document.querySelector("#social-link-template");
+const statusSection = document.querySelector("#status-section");
+const statusTagTemplate = document.querySelector("#status-tag-template");
 const randomProjectBtn = document.querySelector("#random-project-btn");
 const projectsCount = document.querySelector("#projects-count");
 
@@ -15,9 +17,18 @@ function createCard(project) {
     const icon = node.querySelector(".icon");
     const title = node.querySelector("h3");
     const description = node.querySelector(".description");
+    const cardTop = node.querySelector(".card-top");
 
     card.dataset.projectId = project.id;
     card.setAttribute("aria-label", `${project.name} card`);
+
+    if (project.pinned) {
+        card.classList.add("pinned");
+        const badge = document.createElement("span");
+        badge.className = "pinned-badge";
+        badge.textContent = "★ Pinned";
+        cardTop.appendChild(badge);
+    }
 
     projectLink.href = project.url;
     projectLink.setAttribute("aria-label", `${project.name} - open project`);
@@ -52,9 +63,10 @@ function validateProject(project, index) {
 }
 
 function renderList(projects) {
+    const sorted = [...projects].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
     const fragment = document.createDocumentFragment();
 
-    projects.forEach((project, index) => {
+    sorted.forEach((project, index) => {
         validateProject(project, index);
         fragment.appendChild(createCard(project));
     });
@@ -131,6 +143,53 @@ function updateProjectsCount(total) {
     projectsCount.textContent = `${total} projects ready to explore.`;
 }
 
+function renderStatus(data) {
+    if (!statusSection || !statusTagTemplate) {
+        return;
+    }
+
+    const infoEl = document.createElement("div");
+    infoEl.className = "status-info";
+
+    const labelEl = document.createElement("p");
+    labelEl.className = "status-label";
+    labelEl.textContent = "Current project in works";
+
+    const currentEl = document.createElement("p");
+    currentEl.className = "status-current";
+    currentEl.textContent = data.currentProject || "—";
+
+    const statusEl = document.createElement("p");
+    const dot = document.createElement("span");
+    dot.className = "status-dot";
+    dot.setAttribute("aria-hidden", "true");
+    statusEl.appendChild(dot);
+    statusEl.appendChild(document.createTextNode(data.status || ""));
+
+    const descEl = document.createElement("p");
+    descEl.textContent = data.description || "";
+
+    infoEl.appendChild(labelEl);
+    infoEl.appendChild(currentEl);
+    infoEl.appendChild(statusEl);
+    infoEl.appendChild(descEl);
+
+    const tagsEl = document.createElement("div");
+    tagsEl.className = "status-tags";
+    tagsEl.setAttribute("aria-label", "Tags");
+
+    (data.tags || []).forEach((tag) => {
+        const node = statusTagTemplate.content.cloneNode(true);
+        node.querySelector(".status-tag").textContent = tag;
+        tagsEl.appendChild(node);
+    });
+
+    statusSection.innerHTML = "";
+    statusSection.appendChild(infoEl);
+    statusSection.appendChild(tagsEl);
+    statusSection.hidden = false;
+}
+
 function pickRandomProject() {
     if (allProjects.length === 0) {
         return;
@@ -173,6 +232,12 @@ async function renderProjects() {
 
         if (randomProjectBtn) {
             randomProjectBtn.addEventListener("click", pickRandomProject);
+        }
+
+        const statusResponse = await fetch("./data/status.json", {cache: "no-store"});
+        if (statusResponse.ok) {
+            const statusData = await statusResponse.json();
+            renderStatus(statusData);
         }
     } catch (error) {
         grid.innerHTML = `<p class=\"muted\">Failed to load projects. ${error.message}</p>`;

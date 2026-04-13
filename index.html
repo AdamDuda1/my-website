@@ -23,6 +23,8 @@
     </section>
 
     <section id="projects-grid" class="projects-grid" aria-live="polite"></section>
+
+    <section id="status-section" class="status-section" aria-live="polite" hidden></section>
 </main>
 
 
@@ -48,6 +50,10 @@
         </span>
         <span class="social-label"></span>
       </a>
+    </template>
+
+    <template id="status-tag-template">
+      <span class="status-tag"></span>
     </template>
 
 <script type="module" src="./scripts/render-projects.js"></script>

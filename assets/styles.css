@@ -125,11 +125,11 @@ h1 {
               place-items: center;
       width: 1.38rem;
       height: 1.38rem;
-      border-radius: 999px;
+      border-radius: 0;
       font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.02em;
-      background: rgba(142, 162, 255, 0.2);
+      background: transparent;
       color: #dfe5ff;
       overflow: hidden;
     }
@@ -294,6 +294,98 @@ h1 {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ── Pinned / favourite cards ──────────────────────────────────────── */
+.project-card.pinned {
+    background: linear-gradient(165deg, #1f2a18 0%, #2b3a10 40%, #1a2350 100%);
+    border-color: rgba(255, 210, 80, 0.35);
+}
+
+.project-card.pinned:hover {
+    border-color: rgba(255, 210, 80, 0.75);
+}
+
+.pinned-badge {
+    margin-left: auto;
+    font-size: 0.78rem;
+    line-height: 1;
+    padding: 0.18rem 0.42rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    color: #1a1200;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ── Status section ─────────────────────────────────────────────────── */
+.status-section {
+    margin-top: 0.5rem;
+    padding: 1.1rem 1.25rem 1.25rem;
+    border-radius: var(--radius);
+    background: linear-gradient(165deg, var(--surface), var(--surface-2));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow);
+}
+
+.status-info {
+    margin-bottom: 1rem;
+}
+
+.status-info p {
+    margin: 0.28rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.status-info .status-label {
+    font-size: 0.82rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.status-info .status-current {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.status-info .status-dot {
+    display: inline-block;
+    width: 0.52rem;
+    height: 0.52rem;
+    border-radius: 50%;
+    background: #4ade80;
+    margin-right: 0.38rem;
+    vertical-align: middle;
+    box-shadow: 0 0 6px 1px rgba(74, 222, 128, 0.55);
+}
+
+.status-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.status-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.42rem 0.72rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    font-size: 0.84rem;
+    transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.status-tag:hover {
+    border-color: rgba(142, 162, 255, 0.7);
+    transform: translateY(-1px);
 }
 
 @media (max-width: 580px) {
