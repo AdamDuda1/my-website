@@ -6,7 +6,7 @@
     "icon": "https://github.com/AdamDuda1/circuity/blob/master/public/icons/icon-192x192.png?raw=true",
     "repo": "https://github.com/AdamDuda1/circuity",
     "url": "https://circuity.adamd.pl.eu.org/",
-    "pinned": true
+    "status": "pinned"
   },
   {
     "id": "szkopul-utils",
@@ -15,7 +15,7 @@
     "icon": "https://flavortown.hackclub.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MjQxNzI1LCJwdXIiOiJibG9iX2lkIn19--7620174e2f76457e397e43441fb4ae29ea9accee/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJ3ZWJwIiwicmVzaXplX3RvX2xpbWl0IjpbMTYwMCw5MDBdLCJzYXZlciI6eyJzdHJpcCI6dHJ1ZSwicXVhbGl0eSI6NzV9fSwicHVyIjoidmFyaWF0aW9uIn19--3bc8a2c9d65e3b087c0c0b37dcfb642bb247bc73/icon-128.png",
     "repo": "https://github.com/AdamDuda1/szkopul-utils",
     "url": "https://github.com/AdamDuda1/szkopul-utils#readme",
-    "pinned": true
+    "status": "pinned"
   },
   {
     "id": "lost-in-space",
@@ -24,7 +24,7 @@
     "icon": "https://img.itch.zone/aW1nLzI2NjM4MDgyLnBuZw==/347x500/oH8Nfg.png",
     "repo": "https://github.com/AdamDuda1/lost-in-space",
     "url": "https://adamduda.itch.io/lost-in-space",
-    "pinned": true
+    "status": "pinned"
   },
   {
     "id": "tictactoe",
@@ -32,7 +32,8 @@
     "description": "A simple tic tac toe game for Android, with innovative game modes. Free with no ads! [web multiplayer version version coming soon ™️]",
     "icon": "https://lh3.googleusercontent.com/QdBCbW-QwmNnvu-_l5e-VmuxrBPv18sIJeOe5TLGeNXLm05mDIzcVMwNzAeTdKEJw9YU",
     "repo": "https://github.com/AdamDuda1/tic-tac-toe-game",
-    "url": "https://play.google.com/store/apps/details?id=com.adamgamesstudio.tictactoegame"
+    "url": "https://play.google.com/store/apps/details?id=com.adamgamesstudio.tictactoegame",
+    "status": "in-progress"
   },
   {
     "id": "gigapoly",
@@ -40,7 +41,8 @@
     "description": "A simple tic tac toe game for Android, with innovative game modes. Free with no ads! [web multiplayer version version coming soon ™️]",
     "icon": "https://lh3.googleusercontent.com/QdBCbW-QwmNnvu-_l5e-VmuxrBPv18sIJeOe5TLGeNXLm05mDIzcVMwNzAeTdKEJw9YU",
     "repo": "https://github.com/AdamDuda1/tic-tac-toe-game",
-    "url": "https://play.google.com/store/apps/details?id=com.adamgamesstudio.tictactoegame"
+    "url": "https://play.google.com/store/apps/details?id=com.adamgamesstudio.tictactoegame",
+    "status": "abandoned"
   }
 ]
 

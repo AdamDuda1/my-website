@@ -6,8 +6,17 @@ const statusSection = document.querySelector("#status-section");
 const statusTagTemplate = document.querySelector("#status-tag-template");
 const randomProjectBtn = document.querySelector("#random-project-btn");
 const projectsCount = document.querySelector("#projects-count");
+const usefulLinksSection = document.querySelector("#useful-links-section");
+const usefulLinksGrid = document.querySelector("#useful-links-grid");
+const usefulLinkTemplate = document.querySelector("#useful-link-template");
 
 let allProjects = [];
+
+const STATUS_CONFIG = {
+    pinned: { label: "★ Pinned", className: "badge-pinned", priority: 0 },
+    "in-progress": { label: "▶ In Progress", className: "badge-in-progress", priority: 1 },
+    abandoned: { label: "✕ Abandoned", className: "badge-abandoned", priority: 2 },
+};
 
 function createCard(project) {
     const node = template.content.cloneNode(true);
@@ -22,11 +31,12 @@ function createCard(project) {
     card.dataset.projectId = project.id;
     card.setAttribute("aria-label", `${project.name} card`);
 
-    if (project.pinned) {
-        card.classList.add("pinned");
+    const statusCfg = STATUS_CONFIG[project.status];
+    if (statusCfg) {
+        card.classList.add(`status-${project.status}`);
         const badge = document.createElement("span");
-        badge.className = "pinned-badge";
-        badge.textContent = "★ Pinned";
+        badge.className = `status-badge ${statusCfg.className}`;
+        badge.textContent = statusCfg.label;
         cardTop.appendChild(badge);
     }
 
@@ -63,7 +73,8 @@ function validateProject(project, index) {
 }
 
 function renderList(projects) {
-    const sorted = [...projects].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+    const priority = (p) => (STATUS_CONFIG[p.status]?.priority ?? 99);
+    const sorted = [...projects].sort((a, b) => priority(a) - priority(b));
     const fragment = document.createDocumentFragment();
 
     sorted.forEach((project, index) => {
@@ -206,6 +217,37 @@ function pickRandomProject() {
     window.open(selected.url, "_blank", "noopener,noreferrer");
 }
 
+function createUsefulLink(link) {
+    const node = usefulLinkTemplate.content.cloneNode(true);
+    const anchor = node.querySelector(".useful-link");
+    const labelEl = node.querySelector(".useful-link-label");
+    const descEl = node.querySelector(".useful-link-desc");
+
+    anchor.href = link.url;
+    anchor.setAttribute("aria-label", link.description ? `${link.label} — ${link.description}` : link.label);
+    labelEl.textContent = link.label;
+    if (link.description) {
+        descEl.textContent = link.description;
+    } else {
+        descEl.hidden = true;
+    }
+
+    return node;
+}
+
+function renderUsefulLinks(links) {
+    if (!usefulLinksSection || !usefulLinksGrid || !usefulLinkTemplate) {
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    links.forEach((link) => fragment.appendChild(createUsefulLink(link)));
+
+    usefulLinksGrid.innerHTML = "";
+    usefulLinksGrid.appendChild(fragment);
+    usefulLinksSection.hidden = false;
+}
+
 async function renderProjects() {
     try {
         const socialResponse = await fetch("./data/social-links.json", {cache: "no-store"});
@@ -238,6 +280,14 @@ async function renderProjects() {
         if (statusResponse.ok) {
             const statusData = await statusResponse.json();
             renderStatus(statusData);
+        }
+
+        const usefulLinksResponse = await fetch("./data/useful-links.json", {cache: "no-store"});
+        if (usefulLinksResponse.ok) {
+            const usefulLinks = await usefulLinksResponse.json();
+            if (Array.isArray(usefulLinks)) {
+                renderUsefulLinks(usefulLinks);
+            }
         }
     } catch (error) {
         grid.innerHTML = `<p class=\"muted\">Failed to load projects. ${error.message}</p>`;
