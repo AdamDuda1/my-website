@@ -25,24 +25,29 @@
     "repo": "https://github.com/AdamDuda1/lost-in-space",
     "url": "https://adamduda.itch.io/lost-in-space",
     "status": "pinned"
-  },
-  {
-    "id": "tictactoe",
-    "name": "Tic Tac Toe (Android)",
-    "description": "A simple tic tac toe game for Android, with innovative game modes. Free with no ads! [web multiplayer version version coming soon ™️]",
-    "icon": "https://lh3.googleusercontent.com/QdBCbW-QwmNnvu-_l5e-VmuxrBPv18sIJeOe5TLGeNXLm05mDIzcVMwNzAeTdKEJw9YU",
-    "repo": "https://github.com/AdamDuda1/tic-tac-toe-game",
-    "url": "https://play.google.com/store/apps/details?id=com.adamgamesstudio.tictactoegame",
-    "status": "in-progress"
-  },
-  {
-    "id": "gigapoly",
-    "name": "Tic Tac Toe (Android)",
-    "description": "A simple tic tac toe game for Android, with innovative game modes. Free with no ads! [web multiplayer version version coming soon ™️]",
-    "icon": "https://lh3.googleusercontent.com/QdBCbW-QwmNnvu-_l5e-VmuxrBPv18sIJeOe5TLGeNXLm05mDIzcVMwNzAeTdKEJw9YU",
-    "repo": "https://github.com/AdamDuda1/tic-tac-toe-game",
-    "url": "https://play.google.com/store/apps/details?id=com.adamgamesstudio.tictactoegame",
-    "status": "abandoned"
-  }
-]
-
+      },
+        {
+            "id": "tictactoe",
+                "name": "Tic Tac Toe (Android)",
+                    "description": "A simple tic tac toe game for Android, with innovative game modes. Free with no ads! [web multiplayer version version coming soon ™️]",
+                        "icon": "https://lh3.googleusercontent.com/QdBCbW-QwmNnvu-_l5e-VmuxrBPv18sIJeOe5TLGeNXLm05mDIzcVMwNzAeTdKEJw9YU",
+                            "repo": "https://github.com/AdamDuda1/tic-tac-toe-game",
+                                "url": "https://play.google.com/store/apps/details?id=com.adamgamesstudio.tictactoegame",
+                                    "status": "in-progress"
+                                      },
+                                        {
+                                            "id": "gigapoly",
+                                                "name": "Gigapoly",
+                                                    "description": "A console playable version of solitaire, made for a polish programming contest.",
+                                                        "repo": "https://github.com/AdamDuda1/pasjans-gigathon-2025",
+                                                            "status": "abandoned"
+                                                              },
+                                                                {
+                                                                    "id": "gigapoly",
+                                                                        "name": "Gigapoly",
+                                                                            "description": "A very minimalistic implementation of the monopoly board game in C++ (CLI!) made for a polish programming contest.",
+                                                                                "repo": "https://github.com/AdamDuda1/gigapoly",
+                                                                                    "status": "abandoned"
+                                                                                      }
+                                                                                      ]
+                                                                                      

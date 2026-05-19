@@ -10,7 +10,7 @@
   {
     "id": "slack",
     "label": "Slack",
-    "url": "https://slack.com",
+    "url": "https://hackclub.enterprise.slack.com/archives/D0ABFC57SPJ",
     "iconSrc": "https://cdn.simpleicons.org/slack/ffffff",
     "iconText": "SL",
     "enabled": true
@@ -18,7 +18,7 @@
   {
     "id": "google-play",
     "label": "Google Play",
-    "url": "https://play.google.com",
+    "url": "https://play.google.com/store/apps/dev?id=6333383434942028842",
     "iconSrc": "https://cdn.simpleicons.org/googleplay/ffffff",
     "iconText": "GP",
     "enabled": true
