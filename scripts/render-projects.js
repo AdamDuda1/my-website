@@ -2,10 +2,21 @@ const grid = document.querySelector("#projects-grid");
 const template = document.querySelector("#project-card-template");
 const socialLinksRoot = document.querySelector("#social-links");
 const socialTemplate = document.querySelector("#social-link-template");
+const statusSection = document.querySelector("#status-section");
+const statusTagTemplate = document.querySelector("#status-tag-template");
 const randomProjectBtn = document.querySelector("#random-project-btn");
 const projectsCount = document.querySelector("#projects-count");
+const usefulLinksSection = document.querySelector("#useful-links-section");
+const usefulLinksGrid = document.querySelector("#useful-links-grid");
+const usefulLinkTemplate = document.querySelector("#useful-link-template");
 
 let allProjects = [];
+
+const STATUS_CONFIG = {
+    pinned: { label: "★ Pinned", className: "badge-pinned", priority: 0 },
+    "in-progress": { label: "▶ In Progress", className: "badge-in-progress", priority: 1 },
+    abandoned: { label: "✕ Abandoned", className: "badge-abandoned", priority: 2 },
+};
 
 function createCard(project) {
     const node = template.content.cloneNode(true);
@@ -15,9 +26,19 @@ function createCard(project) {
     const icon = node.querySelector(".icon");
     const title = node.querySelector("h3");
     const description = node.querySelector(".description");
+    const cardTop = node.querySelector(".card-top");
 
     card.dataset.projectId = project.id;
     card.setAttribute("aria-label", `${project.name} card`);
+
+    const statusCfg = STATUS_CONFIG[project.status];
+    if (statusCfg) {
+        card.classList.add(`status-${project.status}`);
+        const badge = document.createElement("span");
+        badge.className = `status-badge ${statusCfg.className}`;
+        badge.textContent = statusCfg.label;
+        cardTop.appendChild(badge);
+    }
 
     projectLink.href = project.url;
     projectLink.setAttribute("aria-label", `${project.name} - open project`);
@@ -52,9 +73,11 @@ function validateProject(project, index) {
 }
 
 function renderList(projects) {
+    const priority = (p) => (STATUS_CONFIG[p.status]?.priority ?? 99);
+    const sorted = [...projects].sort((a, b) => priority(a) - priority(b));
     const fragment = document.createDocumentFragment();
 
-    projects.forEach((project, index) => {
+    sorted.forEach((project, index) => {
         validateProject(project, index);
         fragment.appendChild(createCard(project));
     });
@@ -131,6 +154,53 @@ function updateProjectsCount(total) {
     projectsCount.textContent = `${total} projects ready to explore.`;
 }
 
+function renderStatus(data) {
+    if (!statusSection || !statusTagTemplate) {
+        return;
+    }
+
+    const infoEl = document.createElement("div");
+    infoEl.className = "status-info";
+
+    const labelEl = document.createElement("p");
+    labelEl.className = "status-label";
+    labelEl.textContent = "Current project in works";
+
+    const currentEl = document.createElement("p");
+    currentEl.className = "status-current";
+    currentEl.textContent = data.currentProject || "—";
+
+    const statusEl = document.createElement("p");
+    const dot = document.createElement("span");
+    dot.className = "status-dot";
+    dot.setAttribute("aria-hidden", "true");
+    statusEl.appendChild(dot);
+    statusEl.appendChild(document.createTextNode(data.status || ""));
+
+    const descEl = document.createElement("p");
+    descEl.textContent = data.description || "";
+
+    infoEl.appendChild(labelEl);
+    infoEl.appendChild(currentEl);
+    infoEl.appendChild(statusEl);
+    infoEl.appendChild(descEl);
+
+    const tagsEl = document.createElement("div");
+    tagsEl.className = "status-tags";
+    tagsEl.setAttribute("aria-label", "Tags");
+
+    (data.tags || []).forEach((tag) => {
+        const node = statusTagTemplate.content.cloneNode(true);
+        node.querySelector(".status-tag").textContent = tag;
+        tagsEl.appendChild(node);
+    });
+
+    statusSection.innerHTML = "";
+    statusSection.appendChild(infoEl);
+    statusSection.appendChild(tagsEl);
+    statusSection.hidden = false;
+}
+
 function pickRandomProject() {
     if (allProjects.length === 0) {
         return;
@@ -145,6 +215,37 @@ function pickRandomProject() {
     });
 
     window.open(selected.url, "_blank", "noopener,noreferrer");
+}
+
+function createUsefulLink(link) {
+    const node = usefulLinkTemplate.content.cloneNode(true);
+    const anchor = node.querySelector(".useful-link");
+    const labelEl = node.querySelector(".useful-link-label");
+    const descEl = node.querySelector(".useful-link-desc");
+
+    anchor.href = link.url;
+    anchor.setAttribute("aria-label", link.description ? `${link.label} — ${link.description}` : link.label);
+    labelEl.textContent = link.label;
+    if (link.description) {
+        descEl.textContent = link.description;
+    } else {
+        descEl.hidden = true;
+    }
+
+    return node;
+}
+
+function renderUsefulLinks(links) {
+    if (!usefulLinksSection || !usefulLinksGrid || !usefulLinkTemplate) {
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    links.forEach((link) => fragment.appendChild(createUsefulLink(link)));
+
+    usefulLinksGrid.innerHTML = "";
+    usefulLinksGrid.appendChild(fragment);
+    usefulLinksSection.hidden = false;
 }
 
 async function renderProjects() {
@@ -173,6 +274,20 @@ async function renderProjects() {
 
         if (randomProjectBtn) {
             randomProjectBtn.addEventListener("click", pickRandomProject);
+        }
+
+        const statusResponse = await fetch("./data/status.json", {cache: "no-store"});
+        if (statusResponse.ok) {
+            const statusData = await statusResponse.json();
+            renderStatus(statusData);
+        }
+
+        const usefulLinksResponse = await fetch("./data/useful-links.json", {cache: "no-store"});
+        if (usefulLinksResponse.ok) {
+            const usefulLinks = await usefulLinksResponse.json();
+            if (Array.isArray(usefulLinks)) {
+                renderUsefulLinks(usefulLinks);
+            }
         }
     } catch (error) {
         grid.innerHTML = `<p class=\"muted\">Failed to load projects. ${error.message}</p>`;

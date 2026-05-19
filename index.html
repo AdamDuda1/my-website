@@ -23,6 +23,13 @@
     </section>
 
     <section id="projects-grid" class="projects-grid" aria-live="polite"></section>
+
+    <section id="status-section" class="status-section" aria-live="polite" hidden></section>
+
+    <section id="useful-links-section" class="useful-links-section" aria-live="polite" hidden>
+      <h2 class="section-heading">Useful Links</h2>
+      <div id="useful-links-grid" class="useful-links-grid"></div>
+    </section>
 </main>
 
 
@@ -47,6 +54,17 @@
           <span class="social-icon-text"></span>
         </span>
         <span class="social-label"></span>
+      </a>
+    </template>
+
+    <template id="status-tag-template">
+      <span class="status-tag"></span>
+    </template>
+
+    <template id="useful-link-template">
+      <a class="useful-link" target="_blank" rel="noreferrer noopener">
+        <span class="useful-link-label"></span>
+        <span class="useful-link-desc"></span>
       </a>
     </template>
 

@@ -1,0 +1,32 @@
+[
+  {
+    "url": "https://developer.mozilla.org/",
+    "label": "MDN Web Docs",
+    "description": "Web API reference"
+  },
+  {
+    "url": "https://caniuse.com/",
+    "label": "Can I Use",
+    "description": "Browser support tables"
+  },
+  {
+    "url": "https://css-tricks.com/",
+    "label": "CSS-Tricks",
+    "description": "CSS tips & guides"
+  },
+  {
+    "url": "https://regex101.com/",
+    "label": "Regex101",
+    "description": "Regex tester & explainer"
+  },
+  {
+    "url": "https://excalidraw.com/",
+    "label": "Excalidraw",
+    "description": "Quick whiteboard sketches"
+  },
+  {
+    "url": "https://bundlephobia.com/",
+    "label": "Bundlephobia",
+    "description": "npm package size check"
+  }
+]
