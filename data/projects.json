@@ -36,20 +36,20 @@
     "status": "in-progress"
   },
   {
-    "id": "gigapoly",
-    "name": "Gigapoly",
+    "id": "pasjans",
+    "name": "Pasjans",
     "description": "A console playable version of solitaire, made for a polish programming contest.",
     "repo": "https://github.com/AdamDuda1/pasjans-gigathon-2025",
-    "icon": "",
-    "url": "",
+    "icon": "https://www.freeiconspng.com/uploads/no-image-icon-15.png",
+    "url": "https://github.com/AdamDuda1/pasjans-gigathon-2025/releases",
     "status": "abandoned"
   },
   {
     "id": "gigapoly",
     "name": "Gigapoly",
     "description": "A very minimalistic implementation of the monopoly board game in C++ (CLI!) made for a polish programming contest.",
-    "icon": "",
-    "url": "",
+    "icon": "https://www.freeiconspng.com/uploads/no-image-icon-15.png",
+    "url": "https://github.com/AdamDuda1/gigapoly/releases",
     "repo": "https://github.com/AdamDuda1/gigapoly",
     "status": "abandoned"
   }
