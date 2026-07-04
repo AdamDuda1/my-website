@@ -23,7 +23,7 @@ body {
     font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
     min-height: 100%;
 }
-
+/*
 body::before,
 body::after {
     content: "";
@@ -34,7 +34,7 @@ body::after {
     border-radius: 50%;
     filter: blur(24px);
     opacity: 0.35;
-}
+}*/
 
 body::before {
     top: -40px;
